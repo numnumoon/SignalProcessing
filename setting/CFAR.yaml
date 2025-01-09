@@ -1,0 +1,6 @@
+cfar_config:
+  weibull_cfar:
+    threshold: 0.5
+    guard_cell: 1
+    reference_cell: 4
+    pfa: 0.001
