@@ -1,0 +1,1 @@
+docker run --mount type=bind,source=/mnt/c,target=/hogehoge -it --rm example

@@ -1,0 +1,21 @@
+FROM nvidia/cuda:12.2.2-cudnn8-devel-rockylinux8
+
+# 必要なファイル類のコピー
+COPY ../copy /home 
+
+# 新しいユーザとグループを作成
+RUN groupadd -g 1500 min \
+    && useradd -m -u 1500 -g min -s /bin/bash minmin
+
+# 作業ディレクトリの所有権を変更
+RUN chown -R minmin:min /home
+
+# ユーザ切り替え
+USER minmin
+
+# 便利そうなエイリアスの設定
+RUN echo "alias ls='ls --color=always'" >> ~/.bashrc \
+    && echo "alias ll='ls -l --color=always'" >> ~/.bashrc
+
+
+CMD [ "bash", "-c", "ln -s /home/sample.txt /home/symlink_sample.txt && exec bash"]
